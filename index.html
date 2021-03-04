@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Part 2</title>
+</head>
+<body>
+    <h1>Movie App!</h1>
+    <form class="movie-ratings">
+        <div>
+            Movie Title:<input type="text" id="title" placeholder="Type Movie Title">
+        </div>
+        <div>
+            Movie Rating:<input type="number" id="rating" min="0" max="10">
+        </div>
+        <div>
+            <button id="submit">Submit Movie Rating!</button>
+        </div>
+    </form>
+
+
+        <h2>List of Movies and their Ratings:</h2>
+        Put the List of Movies in Alphabetical Order:<button id="alpha">Alpha Order!</button>
+        <br>
+        Put the List of Movies in Order by Rating:<button id="rateOrder">Rating Order!</button>
+        <div>
+            <ul id="submitted">
+
+            </ul>
+        </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+
+$('#submit').on('click', function(e) {
+    e.preventDefault();
+
+    let $titleInput = $('#title').val();
+    let $ratingInput = $('#rating').val();
+
+    if($titleInput.length < 2){
+        alert("Movie Title must be longer than two characters long!");
+        return null;
+    }
+
+    let $listItem = $('<li>', {text: `"${$titleInput}"` + " has a rating of " + `${$ratingInput}`}).append('<button class="remove">Remove Movie</button>');
+    
+    $('ul').append($listItem);
+
+    $('#title').val("");
+    $('#rating').val("");
+});
+
+
+$('ul').on('click', '.remove', function(){
+    $(this).closest('li').remove();
+});
+
+
+// Allow users to sort alphabetically by the title of the movie or by the rating of the movie from lowest to highest and vice versa.
+
+// $('#alpha').on('click', function(e){
+
+// });
+
+
+// $('#rateOrder').on('click', function(e){
+
+// });
+
+    </script>
+</body>
+</html>
